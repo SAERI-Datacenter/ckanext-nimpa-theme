@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # 1.01 arb Mon 25 Mar 18:57:56 GMT 2019 - handle change to image_url better
 # 1.00 arb 
 
@@ -6,9 +6,6 @@
 # See https://docs.ckan.org/en/2.8/api/index.html#ckan.logic.action.patch.group_patch
 # See https://github.com/ckan/ckan/issues/3853
 
-import urllib2
-import urllib
-import json
 from pprint import pprint
 import csv
 import sys
@@ -129,7 +126,6 @@ groups_names = get_existing_groups_names(groups_data)
 for row in reader:
 	print("Add group: %s" % row['group'])
 	add_group(row)
-	exit(0)
 
 # Close
 RemoteCKAN.close(ckan)

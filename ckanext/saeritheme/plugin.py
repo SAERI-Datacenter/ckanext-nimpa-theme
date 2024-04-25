@@ -62,7 +62,8 @@ class SaerithemePlugin(plugins.SingletonPlugin):
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
-        toolkit.add_resource('fanstatic', 'saeritheme') # needed to add .js
+        toolkit.add_resource("webassets", 'saeritheme') # needed to add assets.js
+
 
     def dataset_facets(self, facets_dict, package_type):
         '''Add new search facet (filter) for datasets.
