@@ -8,7 +8,5 @@
 
   {# include the content of the original master "styles" block #}
   {{ super() }}
-
-  <link rel="stylesheet" href="saeritheme.css" />
-
+  {% asset 'saeritheme/theme-css' %}
 {% endblock %}

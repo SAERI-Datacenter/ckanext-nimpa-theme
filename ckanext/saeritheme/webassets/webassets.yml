@@ -7,3 +7,7 @@ homepage-slider_css:
   output: saeritheme/%(version)s_homepage-slider.css
   contents:
     - css/homepage-slider.css
+theme-css:
+  output: saeritheme/%(version)s_theme.css
+  contents:
+    - css/theme.css
