@@ -44,9 +44,12 @@
     $('.homepage-slider-ng .images-wrapper').each(function() {
       var imgroll = $(this);
       rollImageInit(imgroll);
-      setInterval(function() {
-        rollImageNext(imgroll);
-      }, conf.rollTime);
+      if (imgroll.children().length > 1) {
+          setInterval(function () {
+            rollImageNext(imgroll);
+          }, conf.rollTime);
+      }
+
     });
 
   });
