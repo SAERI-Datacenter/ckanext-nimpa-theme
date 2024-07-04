@@ -1,0 +1,107 @@
+html {
+  font-size: 16px;
+}
+
+:root {
+    --primary-color: #265186;
+}
+
+.home-box .search-form {
+    margin-bottom: 0;
+}
+
+.account-masthead {
+  background: var(--primary-color);
+}
+
+.masthead .main-navbar ul li a {
+    color:  var(--primary-color);
+
+}
+
+.masthead .main-navbar ul li:hover a {
+    color: white;
+    background-color: var(--primary-color);
+}
+
+.masthead .main-navbar ul li.active a {
+  border-radius: 0.3rem;
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.masthead .main-navbar ul li a:hover {
+        color: white;
+    }
+
+.masthead {
+  background-color: white;
+     position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.saeri_home_page_box {
+  height: 300px;
+  opacity: 0.5;
+}
+
+/* SAERI's dark_blue = #004368 */
+.homepage .module-search .tags {
+	background: #004368;
+}
+
+/* allow larger header than default theme*/
+.masthead .navbar .logo img {
+  max-height: 70px;
+}
+
+/* remove double padding which comes from container and navbar*/
+.masthead .container .navbar {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+ /* footer to match Namibian gov colour */
+.site-footer,
+.homepage .module-search .module-content {
+	background: var(--primary-color);
+}
+
+.account-masthead .account .notifications a span,
+.account-masthead .account ul li a:hover,
+.masthead .navigation .nav-pills li a:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.masthead .navigation .nav-pills li.active a {
+  background-color: rgba(0, 0, 0, 0.35);
+}
+
+.activity {	background: none;
+}
+
+span.actor,
+.activity .item .icon {
+	display: none;
+}
+
+.activity .item p {
+	visibility: hidden;
+	margin-left: 0;
+	font-size: 1.2em;
+}
+
+.activity .item p > span {
+	visibility: visible;
+	float: left;
+}
+
+.activity .item .date {
+	padding-left: 1em;
+	line-height: 2em;
+}
+
+#latest-addings {
+	margin-top: 2em;
+}

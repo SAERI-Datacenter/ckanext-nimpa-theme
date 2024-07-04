@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # 1.01 arb Mon 25 Mar 18:57:56 GMT 2019 - handle change to image_url better
 # 1.00 arb 
 
@@ -6,9 +6,6 @@
 # See https://docs.ckan.org/en/2.8/api/index.html#ckan.logic.action.patch.group_patch
 # See https://github.com/ckan/ckan/issues/3853
 
-import urllib2
-import urllib
-import json
 from pprint import pprint
 import csv
 import sys
@@ -62,7 +59,7 @@ def add_group(row):
 		image_with_path = ''
 	else:
 		if os.path.isfile("%s/%s" % (logo_dir, row['logo'])):
-			image_with_path = "/logo/%s" % row['logo']
+			image_with_path = "%s/logo/%s" % (ckan_root_url, row['logo'])
 		else:
 			print("WARNING: %s logo %s file not found" % (group_name, row['logo']))
 			image_with_path = ''
@@ -115,12 +112,14 @@ if len(sys.argv) > 1:
 ckan_ip = open("ckan_ip.txt").read().replace('\n','')
 api_key = open("ckan_api_key.txt").read().replace('\n','')
 
+ckan_root_url="http://%s" % ckan_ip
+
 # Read in the CSV file
 fp = open(csv_filename)
 reader = csv.DictReader(fp)
 
 # Open the connection to the CKAN server
-ckan = RemoteCKAN('http://%s' % ckan_ip, apikey=api_key, user_agent=user_agent)
+ckan = RemoteCKAN(ckan_root_url, apikey=api_key, user_agent=user_agent)
 
 groups_data = get_existing_groups_dict()
 groups_names = get_existing_groups_names(groups_data)
@@ -129,7 +128,6 @@ groups_names = get_existing_groups_names(groups_data)
 for row in reader:
 	print("Add group: %s" % row['group'])
 	add_group(row)
-	exit(0)
 
 # Close
 RemoteCKAN.close(ckan)

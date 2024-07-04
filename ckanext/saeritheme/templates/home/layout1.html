@@ -7,51 +7,48 @@
 {# so we replace the whole thing layout1.html page with the content below. #}
 {# See http://docs.ckan.org/en/2.8/theming/templates.html  #}
 
-{% resource 'saeritheme/homepage-slider.css' %}
-{% resource 'saeritheme/homepage-slider.js' %}
-
 <div class="homepage-slider-ng">
-  <div class="images-wrapper">
-    <div class="text-wrapper" style="background-image:url(media/fi/P1050796.JPG)"></div>
-    <div class="text-wrapper" style="background-image:url(media/fi/P1060902.JPG);display:none;"></div>
-    <div class="text-wrapper" style="background-image:url(media/fi/P1070744.JPG);display:none;"></div>
-  </div>
-
-  <div class="boxes-wrapper container">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-6">
-        <div class="home-box">
-          {% block search %}
-          {# we use the built-in search snippet #}
-          {% snippet 'home/snippets/search.html' %}
-          {% endblock %}
-        </div>
-      </div>
+    <div class="images-wrapper">
+        <div class="text-wrapper" style="background-image:url(/media/nimpa/nimpa_1.jpeg)"></div>
+<!--        <div class="text-wrapper" style="background-image:url(/media/nimpa/NimpaBanner1.png);display:none;"></div>-->
+<!--        <div class="text-wrapper" style="background-image:url(/media/nimpa/NimpaBanner2.png);display:none;"></div>-->
+<!--        <div class="text-wrapper" style="background-image:url(/media/nimpa/NimpaBanner3.png);display:none;"></div>-->
     </div>
-  </div>
+
+    <div class="boxes-wrapper container">
+        <div class="row">
+            <div class="col-md-6 offset-md-6">
+                <div class="home-box">
+                    {% block search %}
+                        {# we use the built-in search snippet #}
+                        {% snippet 'home/snippets/search.html', search_facets=search_facets %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div role="main">
-  <div class="container">
-    <div class="row">
-      {# we've provided our own helper function to get a list of groups/themes #}
-      {# see plugin.py in the saeritheme plugin #}
-      {# each group is rendered using the code in this file: #}
-      {# "/usr/lib/ckan/default/src/ckan/ckan/templates/group/snippets/group_item.html" #}
-      {% snippet 'group/snippets/group_list.html', groups=h.saeritheme_get_groups_list() %}
-    </div>
-
-    <div class="row">
-        <div id="latest-addings" class="box">
-          <header class="module-heading">
-            <h2>Latest addings</h2>
-          </header>
-          <section class="module-content">
-            {# This shows the recent activity but has been modified from #}
-            {# what is in the docs to prevent raw html being displayed #}
-            {{ h.recently_changed_packages_activity_stream(limit=4)|safe }}
-          </section>
+    <div class="container">
+        <div class="row">
+            {# we've provided our own helper function to get a list of groups/themes #}
+            {# see plugin.py in the saeritheme plugin #}
+            {# each group is rendered using the code in this file: #}
+            {# "/usr/lib/ckan/default/src/ckan/ckan/templates/group/snippets/group_item.html" #}
+            {% snippet 'group/snippets/group_list.html', groups=h.saeritheme_get_groups_list(), homepage=1 %}
         </div>
-      </div>
-  </div>
+
+        <div class="row pt-4">
+            <div class="card-header">
+            <h3 class="m-2">Latest Additions</h3>
+            </div>
+            <div class="card col-md-12">
+                <div class="card-body">
+                    {# Shows the most recent activities on packages #}
+                    {% snippet 'snippets/stream.html', activity_stream=h.recently_changed_packages_activity_stream(limit=4), id=id %}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

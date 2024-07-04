@@ -10,7 +10,7 @@
 
 
 # Change the path to your CKAN config file:
-ini="/etc/ckan/default/production.ini"
+ini="/etc/ckan/default/ckan.ini"
 
 # The locale which we will modify:
 locale="en_GB"
@@ -31,16 +31,18 @@ sed -i -e 's/^msgstr "Edit Group"/msgstr "Edit Theme"/'  $message_source
 sed -i -e 's/^msgstr "Create Group"/msgstr "Create Theme"/'  $message_source
 sed -i -e 's/^msgstr "Update Group"/msgstr "Update Theme"/'  $message_source
 sed -i -e 's/^msgstr "What are Groups?"/msgstr "What are Themes?"/'  $message_source
-sed -i -e 's/^"You can use CKAN Groups to create and manage collections of datasets. "/"You can use CKAN Themes to create and manage collections of datasets. "/'  $message_source
+sed -i -e 's/groups found/themes found/' $message_source
+sed -i -e 's/group found/theme found/' $message_source
+sed -i -e 's/^You can use CKAN Groups to create and manage collections of datasets. This "/"You can use CKAN Themes to create and manage collections of datasets. "/'  $message_source
 
 # Compile the new translation
 python setup.py compile_catalog --use-fuzzy --locale ${locale}
 
 # Update the CKAN config file to use the new translation
-crudini --set --inplace $ini app:main ckan.locale_default en_GB
-crudini --set --inplace $ini app:main ckan.locales_offered en_GB
-crudini --set --inplace $ini app:main ckan.locales_filtered_out '' # was en_GB!!
-crudini --set --inplace $ini app:main ckan.locale_order "en_GB en pt_BR ja it cs_CZ ca es fr el sv sr sr@latin no sk fi ru de pl nl bg ko_KR hu sa sl lv"
+#crudini --set --inplace $ini app:main ckan.locale_default en_GB
+#crudini --set --inplace $ini app:main ckan.locales_offered en_GB
+#crudini --set --inplace $ini app:main ckan.locales_filtered_out '' # was en_GB!!
+#crudini --set --inplace $ini app:main ckan.locale_order "en_GB en pt_BR ja it cs_CZ ca es fr el sv sr sr@latin no sk fi ru de pl nl bg ko_KR hu sa sl lv"
 
 exit 0
 

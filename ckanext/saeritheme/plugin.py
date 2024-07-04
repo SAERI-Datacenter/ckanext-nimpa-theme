@@ -1,6 +1,7 @@
 # 1.04 arb Sat 23 Mar 22:22:04 GMT 2019 - sort by name not by number of packages in group
 # 1.03 arb                              - added get_groups_list helper function for home page layout1.html
 # 1.02 arb Thu Jan 17 16:23:06 GMT 2019 - added search filter facets
+from ckan.common import config
 
 # This plugin defines the theme for CKAN.  All it does is
 # adds 'templates' and 'public' directories to the search path so that
@@ -18,8 +19,7 @@
 
 # Configuration
 # Define the way the groups are sorted when listed on the home page
-group_sort_field = 'name asc' # 'name asc' OR 'package_count desc'
-
+group_sort_field = 'name asc'  # 'name asc' OR 'package_count desc'
 
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
@@ -39,12 +39,19 @@ def get_groups_list():
         data_dict={'sort': group_sort_field, 'all_fields': True})
 
     # Sort by the 'display_name' field, makes more sense than sorting by 'name'
-    groups = sorted(groups, key=lambda k: k['display_name']) 
+    groups = sorted(groups, key=lambda k: k['display_name'])
 
     # Truncate the list to the top 20 (by name or most popular) groups only.
     groups = groups[:20]
 
     return groups
+
+
+def default_spatial_search_extent():
+    ''' Return the extent of the default spatial search '''
+    value = config.get('ckanext.saeritheme.default_spatial_search_extent')
+    log.warning("search extent is %s", value)
+    return value
 
 
 # The main class constructor
@@ -53,16 +60,16 @@ class SaerithemePlugin(plugins.SingletonPlugin):
     ''' SAERI theme plugin
     '''
     plugins.implements(plugins.IConfigurer)
-    plugins.implements(plugins.IFacets, inherit=True) # to add a search filter facet (need to inherit to get the organization_facets attribute)
-    plugins.implements(plugins.ITemplateHelpers)      # to add template helper functions
-
+    plugins.implements(plugins.IFacets,
+                       inherit=True)  # to add a search filter facet (need to inherit to get the organization_facets attribute)
+    plugins.implements(plugins.ITemplateHelpers)  # to add template helper functions
 
     # IConfigurer
 
     def update_config(self, config_):
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
-        toolkit.add_resource('fanstatic', 'saeritheme') # needed to add .js
+        toolkit.add_resource("webassets", 'saeritheme')  # needed to add assets.js
 
     def dataset_facets(self, facets_dict, package_type):
         '''Add new search facet (filter) for datasets.
@@ -86,4 +93,5 @@ class SaerithemePlugin(plugins.SingletonPlugin):
         # extension they belong to, to avoid clashing with functions from
         # other extensions.
         log.debug("SaerithemePlugin adding saeritheme_get_groups_list helper")
-        return {'saeritheme_get_groups_list': get_groups_list}
+        return {'saeritheme_get_groups_list': get_groups_list,
+                'saeritheme_default_spatial_search_extent': default_spatial_search_extent}
