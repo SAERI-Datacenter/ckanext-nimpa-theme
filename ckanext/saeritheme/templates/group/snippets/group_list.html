@@ -7,7 +7,7 @@
 <ul class="media-grid row" data-module="media-grid">
 	{% block group_list_inner %}
   {% for group in groups %}
-    {% snippet "group/snippets/group_item.html", group=group, position=loop.index %}
+    {% snippet "group/snippets/group_item.html", group=group, position=loop.index, homepage=homepage%}
   {% endfor %}
   {% endblock %}
 </ul>

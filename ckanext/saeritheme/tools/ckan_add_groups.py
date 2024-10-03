@@ -15,7 +15,7 @@ from ckanapi import RemoteCKAN
 # Configuration
 csv_filename="topic_categories.csv"
 user_agent = 'ckanapiexample/1.0 (+http://example.com/my/website)'
-logo_dir = "../public/logo"
+logo_dir = "../public/logo/themes"
 
 # CSV fields are:
 # csvname,group,description,logo
@@ -59,7 +59,7 @@ def add_group(row):
 		image_with_path = ''
 	else:
 		if os.path.isfile("%s/%s" % (logo_dir, row['logo'])):
-			image_with_path = "%s/logo/%s" % (ckan_root_url, row['logo'])
+			image_with_path = "%s/logo/themes/%s" % (ckan_root_url, row['logo'])
 		else:
 			print("WARNING: %s logo %s file not found" % (group_name, row['logo']))
 			image_with_path = ''

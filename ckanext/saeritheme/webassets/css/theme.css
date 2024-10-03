@@ -6,6 +6,12 @@ html {
     --primary-color: #265186;
 }
 
+.saeri_group_icon {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
 .home-box .search-form {
     margin-bottom: 0;
 }
@@ -34,8 +40,12 @@ html {
         color: white;
     }
 
+.media-item{
+    width: 200px;
+}
+
 .masthead {
-  background-color: white;
+  background: white;
      position: sticky;
     top: 0;
     z-index: 1000;

@@ -6,12 +6,13 @@
 {# remove the 'number of datasets' from the description of the group #}
 {# but only if the homepage variable is 1, which is only set in layout1.html #}
 
-{% block datasets %}
-  {% if homepage==1 %}
-  {% else %}
-    {{ super() }}
-  {% endif %}
-{% endblock datasets %}
+{% block title %}
+    {% if homepage==1 %}
+       <span style="text-align: center">{{ super() }}</span>
+    {% else %}
+        {{ super() }}
+    {% endif %}
+{% endblock %}
 
 {# we have copied exactly the original <img> tag but added saeri_group_icon to the list of classes #}
 {# this will allow you to add your own CSS in saerickan.css eg. to make the icons smaller #}
